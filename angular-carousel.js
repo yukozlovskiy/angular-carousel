@@ -272,7 +272,10 @@ angular.module('angular-carousel', [])
                         setNextSlideTimeout();
                         refreshVirtualSlides();
                     };
-                    currentCarousel.onSlideChange(onSlideChangeCallback);
+                    
+                    if (currentCarousel) {
+                        currentCarousel.onSlideChange(onSlideChangeCallback);
+                    }
 
                     // If new slide was out of range, move to the new assigned one
                     if(savedSlideIndex !== false && currentCarousel.currentSlide !== savedSlideIndex) {
@@ -399,7 +402,9 @@ angular.module('angular-carousel', [])
                 element.off('mouseover mouseout');
                 element.off(pressEvent, carouselPress);
                 element.off(releaseEvent, carouselRelease);
-                slideContainer.off('transitionend oTransitionEnd webkitTransitionEnd');
+                if (slideContainer) {
+                    slideContainer.off('transitionend oTransitionEnd webkitTransitionEnd');
+                }
                 currentCarousel.onSlideChangeCallbacks = [];
                 Carousel.remove(name);
             });
