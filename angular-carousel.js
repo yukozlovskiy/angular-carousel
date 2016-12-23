@@ -158,10 +158,6 @@ angular.module('angular-carousel', [])
 
     var MOVE_TRESHOLD_PERCENTAGE = 25;
 
-    function createEmptySlide(){
-        return angular.element('<slide class="empty"></slide>');
-    }
-
     return {
         restrict: 'AE',
         replace: true,
@@ -273,7 +269,7 @@ angular.module('angular-carousel', [])
                         refreshVirtualSlides();
                     };
                     
-                    if (currentCarousel) {
+                    if (currentCarousel && Carousel.instances[name]) {
                         currentCarousel.onSlideChange(onSlideChangeCallback);
                     }
 
@@ -402,8 +398,9 @@ angular.module('angular-carousel', [])
                 element.off('mouseover mouseout');
                 element.off(pressEvent, carouselPress);
                 element.off(releaseEvent, carouselRelease);
-                if (slideContainer) {
+                if (slideContainer && currentCarousel) {
                     slideContainer.off('transitionend oTransitionEnd webkitTransitionEnd');
+                    currentCarousel.onSlideChangeCallbacks = [];
                 }
                 currentCarousel.onSlideChangeCallbacks = [];
                 Carousel.remove(name);
