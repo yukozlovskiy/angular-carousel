@@ -269,7 +269,7 @@ angular.module('angular-carousel', [])
                         refreshVirtualSlides();
                     };
                     
-                    if (currentCarousel && Carousel.instances[name]) {
+                    if (currentCarousel && typeof currentCarousel !== 'string') {
                         currentCarousel.onSlideChange(onSlideChangeCallback);
                     }
 
