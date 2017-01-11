@@ -310,7 +310,7 @@ angular.module('angular-carousel', [])
 
             // Reset interval function
             var setNextSlideTimeout = function() {
-                if(!interval || currentCarousel.slidesCount < 2) return;
+                if(!interval || currentCarousel && currentCarousel.slidesCount < 2) return;
                 if(timeoutPromise) $timeout.cancel(timeoutPromise);
                 timeoutPromise = $timeout(function() {
                     currentCarousel.next();
