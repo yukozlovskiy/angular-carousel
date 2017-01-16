@@ -153,7 +153,7 @@ angular.module('angular-carousel', [])
 //
 .directive('ngCarousel', ['Carousel', '$timeout', function(Carousel, $timeout) {
     function isTouchDevice() {
-        return 'ontouchstart' in document.documentElement;
+        return ('ontouchstart' in window) || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
     }
 
     var MOVE_TRESHOLD_PERCENTAGE = 25;
